@@ -71,6 +71,12 @@ struct options
 	set_type set = set4;
 	int k = 3;
 	double refer_value = 0;
+	static options set_refer_value(double refer_value)
+	{
+		options op;
+		op.refer_value = refer_value;
+		return op;
+	}
 };
 
 template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
@@ -355,6 +361,11 @@ void calc(const Tao& tao, options op = {})
 		reference.clear();
 	else if (reference.empty())
 		op.refer = true;
+	if (op.refer_value)
+	{
+		op.refer = false;
+		reference = vector<double>(MONTH,op.refer_value);
+	}
 	for (size_t month = 0; month < MONTH; month += max(1, MONTH / 20))
 	{
 		auto mean = get_mean(ave[month]);

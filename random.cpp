@@ -8,6 +8,21 @@ int MONTH = 12, PERSONS = 100;
 #define show(x) cout<<#x" = "<<x<<endl;
 using namespace std;
 
+template<typename Tao>
+auto calc_my(const vector<artifact>& s20221102, Tao tao)
+{
+	auto equip = add_set(tao, s20221102);
+	show(typeid(equip).name());
+	show(equip.reaction_multi());
+	show(equip.reaction_extra());
+	//show(equip.reaction_rate());
+	show(equip.evaluate());
+	show(equip.crit_damage());
+	equip.print();
+	cout << endl;
+	return equip.evaluate();
+}
+
 int main(int argc, char** argv)
 {
 	// argv[0] == self.path
@@ -21,7 +36,7 @@ int main(int argc, char** argv)
 	assert(12 == sub_value_ratio.size());
 
 
-	{auto s20220601 = get_std_sets({ HP,bonus,CR });
+	calc_my([] {auto s20220601 = get_std_sets({HP,bonus,CR});
 	s20220601[0].sub_stat = { CR,CRD,EM };
 	s20220601[0].sub_value = { 2.5,1.7,3 };
 	s20220601[1].sub_stat = { CR,CRD,EM,hp };
@@ -31,19 +46,9 @@ int main(int argc, char** argv)
 	s20220601[3].sub_stat = { CR,EM,CRD,HP };
 	s20220601[3].sub_value = { 2.6,1.9,1.8,0.7 };
 	s20220601[4].sub_stat = { hp,HP,CRD };
-	s20220601[4].sub_value = { 0.8,1.5,3.3 };
+	s20220601[4].sub_value = { 0.8,1.5,3.3 }; return s20220601; }(), Crimson_Witch_of_Flames(Staff_of_Homa(Hu_Tao::get()), 1));
 
-	Hu_Tao equip = add_set(Crimson_Witch_of_Flames(Staff_of_Homa(Hu_Tao::get()), 1), s20220601);
-	show(typeid(equip).name());
-	show(equip.reaction_multi());
-	show(equip.reaction_extra());
-	show(equip.reaction_rate());
-	show(equip.evaluate());
-	show(equip.crit_damage());
-	equip.print();
-	cout << endl; }
-
-	{auto s20221102 = get_std_sets({ EM,EM,EM });
+	calc_my([] { auto s20221102 = get_std_sets({ EM,EM,EM });
 	s20221102[0].sub_stat = { EM,CR,CRD };
 	s20221102[0].sub_value = { 0.7,0.9,3.7 };
 	s20221102[1].sub_stat = { EM,CR,CRD,ATK };
@@ -53,17 +58,7 @@ int main(int argc, char** argv)
 	s20221102[3].sub_stat = { CR,CRD };
 	s20221102[3].sub_value = { 1.5,1.6 };
 	s20221102[4].sub_stat = { CR,CRD,atk };
-	s20221102[4].sub_value = { 1.6,0,1.6 };
-
-	auto equip = add_set(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida<false>::get(), 0)), s20221102);
-	show(typeid(equip).name());
-	show(equip.reaction_multi());
-	show(equip.reaction_extra());
-	show(equip.reaction_rate());
-	show(equip.evaluate());
-	show(equip.crit_damage());
-	equip.print();
-	cout << endl; }
+	s20221102[4].sub_value = { 1.6,0,1.6 }; return s20221102; }(), Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida<false>::get(), 0)));
 
 	//return 0;
 	try
@@ -103,33 +98,24 @@ int main(int argc, char** argv)
 //		calc(Elemental_2(Bonus_2(Thundering_Pulse(yoimiya))));
 #define yoimiya Fervent_Flames(Zhong_Li(Bannett(Yoimiya::get())))
 //#define yoimiya Yoimiya::get()
-		{auto s20221102 = get_std_sets({ EM,bonus,CRD });
-		s20221102[0].sub_stat = { EM,CR,CRD,ATK };
-		s20221102[0].sub_value = { 2.6,0.9,2.7,0.9 };
-		s20221102[1].sub_stat = { CR,CRD,ATK };
-		s20221102[1].sub_value = { 1.6,2.5,1.4 };
-		s20221102[2].sub_stat = { CR,CRD };
-		s20221102[2].sub_value = { 1.6,1.9 };
-		s20221102[3].sub_stat = { atk,CRD };
-		s20221102[3].sub_value = { 1.6,1.7 };
-		s20221102[4].sub_stat = { CR,atk };
-		s20221102[4].sub_value = { 4.4,1 };
-
-		auto equip = add_set(Shimenawa_s_Reminiscence(Slingshot(yoimiya)), s20221102);
-		show(typeid(equip).name());
-		show(equip.reaction_multi());
-		show(equip.reaction_extra());
-		//show(equip.reaction_rate());
-		show(equip.evaluate());
-		show(equip.crit_damage());
-		equip.print();
-		cout << endl; }
+		auto rel = calc_my([] {auto s20220929 = get_std_sets({ EM,bonus,CRD });
+		s20220929[0].sub_stat = { EM,CR,CRD,ATK };
+		s20220929[0].sub_value = { 2.6,0.9,2.7,0.9 };
+		s20220929[1].sub_stat = { CR,CRD,ATK };
+		s20220929[1].sub_value = { 1.6,2.5,1.4 };
+		s20220929[2].sub_stat = { CR,CRD };
+		s20220929[2].sub_value = { 1.6,1.9 };
+		s20220929[3].sub_stat = { atk,CRD };
+		s20220929[3].sub_value = { 1.6,1.7 };
+		s20220929[4].sub_stat = { CR,atk };
+		s20220929[4].sub_value = { 4.4,1 }; return s20220929; }(), Shimenawa_s_Reminiscence(Slingshot(yoimiya)));
 		//calc(Shimenawa_s_Reminiscence(Thundering_Pulse(yoimiya)));
 		//calc(Crimson_Witch_of_Flames(Thundering_Pulse(yoimiya), 1));
 		//calc(Echoes_of_an_Offering(Thundering_Pulse(yoimiya)));
 		//calc(ATK_2(Bonus_2(Thundering_Pulse(yoimiya))));
 		//calc(Elemental_2(Bonus_2(Thundering_Pulse(yoimiya))));
-		calc(Shimenawa_s_Reminiscence(Slingshot(yoimiya)));
+		calc(Shimenawa_s_Reminiscence(Slingshot(yoimiya)), options::set_refer_value(rel));
+		calc(Crimson_Witch_of_Flames(Slingshot(yoimiya), 1), options::set_refer_value(rel));
 		//calc(Shimenawa_s_Reminiscence(Rust(Yoimiya::get())));
 
 		//calc(Elemental_2(Elemental_2(Bloom::get())));
