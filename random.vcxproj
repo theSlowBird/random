@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Artifacts.h" />
+    <ClInclude Include="Ayaka.h" />
     <ClInclude Include="Bloom.h" />
     <ClInclude Include="Bow.h" />
     <ClInclude Include="buff.h" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Nahida.h" />
     <ClInclude Include="Polearm.h" />
     <ClInclude Include="random.h" />
+    <ClInclude Include="Sword.h" />
     <ClInclude Include="tools.h" />
     <ClInclude Include="Yae_Miko.h" />
     <ClInclude Include="Yoimiya.h" />

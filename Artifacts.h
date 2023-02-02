@@ -46,7 +46,7 @@ auto Elemental_2(Tao chara)
 	return chara;
 }
 
-// 	攻击力提高18%。
+// 攻击力提高18%。
 template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
 auto ATK_2(Tao chara)
 {
@@ -54,7 +54,7 @@ auto ATK_2(Tao chara)
 	return chara;
 }
 
-// 	治疗加成提高15%。
+// 治疗加成提高15%。
 template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
 auto healing_2(Tao chara)
 {
@@ -62,7 +62,7 @@ auto healing_2(Tao chara)
 	return chara;
 }
 
-// 	追忆之注连
+// 追忆之注连
 template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
 auto Shimenawa_s_Reminiscence(Tao chara)
 {
@@ -71,7 +71,7 @@ auto Shimenawa_s_Reminiscence(Tao chara)
 	return chara;
 }
 
-// 	来歆余响
+// 来歆余响
 template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
 auto Echoes_of_an_Offering(Tao chara)
 {
@@ -80,11 +80,20 @@ auto Echoes_of_an_Offering(Tao chara)
 	return chara;
 }
 
-// 	乐园遗落之花
+// 乐园遗落之花
 template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
 auto Flower_of_Paradise_Lost(Tao chara)
 {
 	chara.value[EM] += 80;
 	chara.reaction_extra_bonus += 0.8;
+	return chara;
+}
+
+// 冰风迷途的勇士
+template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
+auto Blizzard_Strayer(Tao chara, bool freezable)
+{
+	chara.value[bonus] += 0.15;
+	chara.value[CR] += 0.2 * (1 + freezable);
 	return chara;
 }

@@ -71,6 +71,9 @@ struct options
 {
 	bool refer = false;
 	set_type set = set4;
+	// 1 : k - 1, this set : others set
+	// k == 1: no else
+	// k == 3: equal else
 	int k = 3;
 	double refer_value = 0;
 	static options set_refer_value(double refer_value)
@@ -163,9 +166,6 @@ void calc(const Tao& tao, options op = {})
 	auto sub_pb = [&sub, &tao](const vector<double>& now) {for (size_t i = 0; i < no_bonus; i++)sub[i].push_back(now[i] - tao.value[i]); };
 	auto check_ban = [&tao](attribute stat) {for (auto& i : tao.ban)if (stat == i)return true; return false; };
 
-	// 1 : k - 1, inset : not inset
-	// k == 1: no else
-	// k == 3: equal else
 	uniform_int_distribution<>rat(0, op.k);
 	map<size_t, int>freq;
 	auto show_odd = [&freq]() {for (auto& i : freq)cerr << "odd " << i.first << ": " << i.second << endl; cerr << endl; };
@@ -335,8 +335,8 @@ void calc(const Tao& tao, options op = {})
 		break;
 	}
 	cout << left;
-	auto ref = add_set(tao, std_sets).evaluate();
-	cout << "ref: " << ref << endl;
+	auto ref = add_set(tao, std_sets);
+	cout << "ref: " << ref.evaluate() << endl;
 	auto label = character::label_print();
 	for (size_t i = 0; i < label.size(); i++)
 	{
@@ -348,7 +348,17 @@ void calc(const Tao& tao, options op = {})
 	for (size_t i = 0; i < no_bonus; i++)
 	{
 		mean.value[i] = get_mean(sub[i]) + tao.value[i];
+		if (mean.value[i] - ref.value[i] < 1e-10)
+			mean.value[i] = ref.value[i];
 	}
+
+	auto get_length = [] {size_t ret = 0; for (size_t i = 0; i < no_bonus; i++)ret = max(ret, name[i].size()); return ret; };
+	cout << setw(get_length()) << "Attri" << ": "
+		<< setw(9) << "mean" << " - "
+		<< setw(9) << "ref" << " = "
+		<< setw(9) << "D-value" << " => "
+		<< setw(7) << "D-count" << ", "
+		<< "ddB/count" << endl;
 	for (size_t i = 0; i < no_bonus; i++)
 	{
 		Tao that = mean;
@@ -357,13 +367,12 @@ void calc(const Tao& tao, options op = {})
 		arti.sub_stat.push_back(static_cast<attribute>(i));
 		arti.sub_value.push_back(0.85);
 		that.sub(arti);
-		auto get_length = [] {size_t ret = 0; for (size_t i = 0; i < no_bonus; i++)ret = max(ret, name[i].size()); return ret; };
 		cout << setw(get_length()) << name[i] << ": "
 			<< setw(9) << mean.value[i] << " - "
-			<< setw(9) << tao.value[i] << " = "
-			<< setw(9) << mean.value[i] - tao.value[i] << "=>"
-			<< setw(7) << (mean.value[i] - tao.value[i]) / (main_value[i] / sub_value_ratio[i] * 0.85) << ", "
-			<< 31 * log2(mean.evaluate() / that.evaluate()) << endl;
+			<< setw(9) << ref.value[i] << " = "
+			<< setw(9) << mean.value[i] - ref.value[i] << " => "
+			<< setw(7) << (mean.value[i] - ref.value[i]) / (main_value[i] / sub_value_ratio[i] * 0.85) << ", "
+			<< gain2ddB(mean.evaluate() / that.evaluate()) << endl;
 	}
 	cout << endl;
 	stringstream ss;
@@ -393,7 +402,7 @@ void calc(const Tao& tao, options op = {})
 			<< setw(7) << stdev / sqrt(PERSONS) << " ), ";
 		//cout << "mean: " << setw(7) << mean << ", ";
 		//cout << "stdev: " << setw(7) << stdev << ", ";
-		cout << "at_crit ~ N( " << setw(7) << gain2ddB(mean / ref) << ", "
+		cout << "at_crit ~ N( " << setw(7) << gain2ddB(mean / ref.evaluate()) << ", "
 			<< setw(8) << gain2ddB((mean + stdev) / (mean - stdev)) / 2 << " / "
 			<< setw(8) << gain2ddB((mean + stdev / sqrt(PERSONS)) / (mean - stdev / sqrt(PERSONS))) / 2 << " ), ";
 		//cout << "crit/1w: " << setw(7) << gain2ddB(mean / 10000) << ", ";

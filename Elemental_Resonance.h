@@ -1,10 +1,18 @@
 #pragma once
+#include "Artifacts.h"
+#include "Catalyst.h"
+#include "Polearm.h"
+#include "Bow.h"
+#include "Sword.h"
+
 #include "Hu_Tao.h"
 #include "Nahida.h"
 #include "Yae_Miko.h"
 #include "Kokomi.h"
 #include "Yoimiya.h"
 #include "Bloom.h"
+#include "Ayaka.h"
+
 #include "buff.h"
 
 // ÓúÁÆÖ®Ë®
@@ -28,5 +36,13 @@ template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>
 auto Fervent_Flames(Tao chara)
 {
 	chara.value[ATK] += 0.25;
+	return chara;
+}
+
+// ·ÛËéÖ®±ù
+template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
+auto Shattering_Ice(Tao chara)
+{
+	chara.value[CR] += 0.15;
 	return chara;
 }

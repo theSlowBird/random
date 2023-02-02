@@ -1,9 +1,5 @@
 ﻿#include <bits/stdc++.h>
 int MONTH = 12, PERSONS = 100;
-#include "Artifacts.h"
-#include "Catalyst.h"
-#include "Polearm.h"
-#include "Bow.h"
 #include "Elemental_Resonance.h"
 #define show(x) cout<<#x" = "<<x<<endl;
 using namespace std;
@@ -123,9 +119,9 @@ int main(int argc, char** argv)
 		s20230105[3].sub_value = { 0.8,1.5,2.7,2 };
 		s20230105[4].sub_stat = { CRD,ATK,atk };
 		s20230105[4].sub_value = { 4.2,1,1.5 }; return s20230105; }(), Shimenawa_s_Reminiscence(Rust(yoimiya, 4)));
-		calc(Shimenawa_s_Reminiscence(Rust(yoimiya, 4)), options::set_refer_value(rel));
-		calc(Gilded_Dreams(Rust(yoimiya, 4), 1), options::set_refer_value(rel));
-		calc(Crimson_Witch_of_Flames(Rust(yoimiya, 4), 1), options::set_refer_value(rel));
+		//calc(Shimenawa_s_Reminiscence(Rust(yoimiya, 4)), options::set_refer_value(rel));
+		//calc(Gilded_Dreams(Rust(yoimiya, 4), 1), options::set_refer_value(rel));
+		//calc(Crimson_Witch_of_Flames(Rust(yoimiya, 4), 1), options::set_refer_value(rel));
 //#undef yoimiya
 //#define yoimiya Yoimiya::get()
 //		calc(Shimenawa_s_Reminiscence(Thundering_Pulse(yoimiya)), options::set_refer(true));
@@ -140,6 +136,9 @@ int main(int argc, char** argv)
 		//calc(Flower_of_Paradise_Lost(Bloom::get()));
 		//calc(Gilded_Dreams(Bloom::get(), 0));
 		//calc(Elemental_2(Elemental_2(Bloom::get())), false, set22);
+
+		calc(Shattering_Ice(Amenoma_Kageuchi(Blizzard_Strayer(Ayaka::get(), true))));
+		calc(Shattering_Ice(Mistsplitter_Reforged(Blizzard_Strayer(Ayaka::get(), true))));
 	}
 	catch (const string& e)
 	{
