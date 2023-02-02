@@ -68,5 +68,8 @@
     <ClInclude Include="buff.h">
       <Filter>头文件\character</Filter>
     </ClInclude>
+    <ClInclude Include="ddB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

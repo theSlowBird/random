@@ -139,6 +139,7 @@
     <ClInclude Include="Bow.h" />
     <ClInclude Include="buff.h" />
     <ClInclude Include="Catalyst.h" />
+    <ClInclude Include="ddB.h" />
     <ClInclude Include="Elemental_Resonance.h" />
     <ClInclude Include="Hu_Tao.h" />
     <ClInclude Include="Kokomi.h" />

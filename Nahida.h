@@ -39,7 +39,7 @@ public:
 	Nahida_sub(const character& chara) :Nahida(chara) {}
 	double evaluate()const
 	{
-		return character::evaluate() * (value[EM] < 1000 ? pow(2, -10 / 31.) : 1);// 0.800
+		return character::evaluate() * (value[EM] < 1000 ? ddB2gain(-10) : 1);// 0.794
 		//return character::evaluate() * min(1., value[EM] / 1000);
 		//return character::evaluate() * (value[EM] < 1000 ? pow(value[EM] / 1000, 2) : 1);
 	}

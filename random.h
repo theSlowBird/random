@@ -1,6 +1,6 @@
 #pragma once
 #include <bits/stdc++.h>
-#define invalid(x) "invalid "#x" = "+to_string(x)
+#define invalid(x) "invalid "#x" = " + to_string(x)
 using namespace std;
 
 default_random_engine gen(static_cast<unsigned>(chrono::system_clock::now().time_since_epoch().count()));

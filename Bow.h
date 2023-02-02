@@ -24,10 +24,10 @@ auto Slingshot(Tao chara)
 
 // ¹­²Ø
 template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Rust(Tao chara)
+auto Rust(Tao chara, int rank)
 {
 	chara.baseATK += 510;
 	chara.value[ATK] += 0.413;
-	chara.value[bonus] += 0.8;
+	chara.value[bonus] += 0.3 + rank * 0.1;
 	return chara;
 }

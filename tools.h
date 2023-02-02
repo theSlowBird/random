@@ -1,5 +1,7 @@
 #pragma once
 #include "random.h"
+#include "ddB.h"
+#define name2str(x) #x
 extern int MONTH, PERSONS;
 
 void timer(bool init = false)
@@ -11,7 +13,7 @@ void timer(bool init = false)
 	chrono::milliseconds duration;
 	end_time = chrono::system_clock::now();
 	duration = chrono::duration_cast<chrono::milliseconds>(end_time - begin_time);
-	cout << "timer " << duration.count() << " ms" << endl << endl;
+	cout << "timer " << duration.count() << " ms" << endl;
 	begin_time = end_time;
 }
 
@@ -77,11 +79,74 @@ struct options
 		op.refer_value = refer_value;
 		return op;
 	}
+	static options set_refer(bool refer)
+	{
+		options op;
+		op.refer = refer;
+		return op;
+	}
 };
+
+namespace calc_data {
+	static const vector<vector<int>> set22map{
+		{0,0,1,1,2},
+		{0,0,1,2,1},
+		{0,0,2,1,1},
+
+		{0,1,0,1,2},
+		{0,1,0,2,1},
+		{0,2,0,1,1},
+
+		{0,1,1,0,2},
+		{0,1,2,0,1},
+		{0,2,1,0,1},
+
+		{0,1,1,2,0},
+		{0,1,2,1,0},
+		{0,2,1,1,0},
+
+		{1,0,0,1,2},
+		{1,0,0,2,1},
+		{2,0,0,1,1},
+
+		{1,0,1,0,2},
+		{1,0,2,0,1},
+		{2,0,1,0,1},
+
+		{1,0,1,2,0},
+		{1,0,2,1,0},
+		{2,0,1,1,0},
+
+		{1,1,0,0,2},
+		{1,2,0,0,1},
+		{2,1,0,0,1},
+
+		{1,1,0,2,0},
+		{1,2,0,1,0},
+		{2,1,0,1,0},
+
+		{1,1,2,0,0},
+		{1,2,1,0,0},
+		{2,1,1,0,0},
+	};
+	// position, set_type, value
+	static const auto set22invmap = [] {vector<vector<vector<int>>>set22invmap(5);
+	for (size_t i = 0; i < 5; i++)
+		set22invmap[i].resize(3);
+	for (size_t i = 0; i < set22map.size(); i++)
+	{
+		for (size_t j = 0; j < 5; j++)
+		{
+			set22invmap[j][set22map[i][j]].push_back(i);
+		}
+	}
+	return set22invmap; }();
+}
 
 template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
 void calc(const Tao& tao, options op = {})
 {
+	cout << string(20, '=') << "begin " name2str(calc) << string(40, '=') << endl;
 	static vector<double>reference;
 	// get std_sets
 	auto std_sets = get_std_sets(tao.basic);
@@ -200,59 +265,8 @@ void calc(const Tao& tao, options op = {})
 		show_odd();
 		break;
 	case set22:
-		static const vector<vector<int>> set22map{
-			{0,0,1,1,2},
-			{0,0,1,2,1},
-			{0,0,2,1,1},
-
-			{0,1,0,1,2},
-			{0,1,0,2,1},
-			{0,2,0,1,1},
-
-			{0,1,1,0,2},
-			{0,1,2,0,1},
-			{0,2,1,0,1},
-
-			{0,1,1,2,0},
-			{0,1,2,1,0},
-			{0,2,1,1,0},
-
-			{1,0,0,1,2},
-			{1,0,0,2,1},
-			{2,0,0,1,1},
-
-			{1,0,1,0,2},
-			{1,0,2,0,1},
-			{2,0,1,0,1},
-
-			{1,0,1,2,0},
-			{1,0,2,1,0},
-			{2,0,1,1,0},
-
-			{1,1,0,0,2},
-			{1,2,0,0,1},
-			{2,1,0,0,1},
-
-			{1,1,0,2,0},
-			{1,2,0,1,0},
-			{2,1,0,1,0},
-
-			{1,1,2,0,0},
-			{1,2,1,0,0},
-			{2,1,1,0,0},
-		};
-		// position, set_type, value
-		static const auto set22invmap = [] {vector<vector<vector<int>>>set22invmap(5);
-		for (size_t i = 0; i < 5; i++)
-			set22invmap[i].resize(3);
-		for (size_t i = 0; i < set22map.size(); i++)
-		{
-			for (size_t j = 0; j < 5; j++)
-			{
-				set22invmap[j][set22map[i][j]].push_back(i);
-			}
-		}
-		return set22invmap; }();
+		using calc_data::set22map;
+		using calc_data::set22invmap;
 		for (size_t person = 0; person < PERSONS; person++)
 		{
 			vector<vector<artifact>>set22;
@@ -357,14 +371,16 @@ void calc(const Tao& tao, options op = {})
 	ofstream fout(ss.str());
 	cout << typeid(Tao).name() << endl;
 	fout << "month,mean,stdev\n";
+	// no reference, then force to reference
+	if (reference.empty())
+		op.refer = true;
 	if (op.refer)
 		reference.clear();
-	else if (reference.empty())
-		op.refer = true;
+	// exists reference, then use this
 	if (op.refer_value)
 	{
 		op.refer = false;
-		reference = vector<double>(MONTH,op.refer_value);
+		reference = vector<double>(MONTH, op.refer_value);
 	}
 	for (size_t month = 0; month < MONTH; month += max(1, MONTH / 20))
 	{
@@ -377,17 +393,18 @@ void calc(const Tao& tao, options op = {})
 			<< setw(7) << stdev / sqrt(PERSONS) << " ), ";
 		//cout << "mean: " << setw(7) << mean << ", ";
 		//cout << "stdev: " << setw(7) << stdev << ", ";
-		cout << "at_crit ~ N( " << setw(7) << 31 * log2(mean / ref) << ", "
-			<< setw(8) << 31 * log2((mean + stdev) / (mean - stdev)) / 2 << " / "
-			<< setw(8) << 31 * log2((mean + stdev / sqrt(PERSONS)) / (mean - stdev / sqrt(PERSONS))) / 2 << " ), ";
-		//cout << "crit/1w: " << setw(7) << 31 * log2(mean / 10000) << ", ";
+		cout << "at_crit ~ N( " << setw(7) << gain2ddB(mean / ref) << ", "
+			<< setw(8) << gain2ddB((mean + stdev) / (mean - stdev)) / 2 << " / "
+			<< setw(8) << gain2ddB((mean + stdev / sqrt(PERSONS)) / (mean - stdev / sqrt(PERSONS))) / 2 << " ), ";
+		//cout << "crit/1w: " << setw(7) << gain2ddB(mean / 10000) << ", ";
+		// restore reference
 		if (op.refer)
 			reference.push_back(mean);
 		else
-			cout << 31 * log2(mean / reference[month]);
+			cout << gain2ddB(mean / reference[month]);
 		cout << endl;
 		fout << month + 1 << ',' << mean << ',' << stdev << endl;
 	}
-	cout << string(80, '=') << endl;
 	timer();
+	cout << string(20, '=') << "end " name2str(calc) << string(40, '=') << endl;
 }
