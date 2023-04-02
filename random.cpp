@@ -1,7 +1,6 @@
 ﻿#include <bits/stdc++.h>
 int MONTH = 12, PERSONS = 100;
 #include "Elemental_Resonance.h"
-#define show(x) cout<<#x" = "<<x<<endl;
 using namespace std;
 
 template<typename Tao>
@@ -64,7 +63,7 @@ int main(int argc, char** argv)
 		timer(true);
 		//calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get())));
 
-		//calc(Crimson_Witch_of_Flames(Staff_of_Homa(Hu_Tao::get()), 1));
+		calc(Crimson_Witch_of_Flames(Staff_of_Homa(Hu_Tao::get()), 1));
 		
 		//calc(Crimson_Witch_of_Flames(Primordial_Jade_Winged_Spear(Hu_Tao::get())));
 		//calc(Crimson_Witch_of_Flames(Dragon_s_Bane(Hu_Tao::get())));
@@ -79,7 +78,7 @@ int main(int argc, char** argv)
 		//calc(Elemental_2(ATK_2(Kagura_s_Verity(Yae_Miko::get_with_Kazuha()))));
 
 #define Nahida Nahida<false>
-		//calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get(), 0)), true);
+		calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get(), 0)));
 		//calc(Elemental_2(Elemental_2(A_Thousand_Floating_Dreams(Nahida::get(), 0))), false, set22);
 		//calc(Deepwood_Memories(Magic_Guide(Nahida::get())));
 		//calc(Bonus_2(Elemental_2(A_Thousand_Floating_Dreams(Nahida::get(), 0))));
@@ -88,6 +87,9 @@ int main(int argc, char** argv)
 		//calc(Bonus_2(Elemental_2(Magic_Guide(Nahida::get()))));
 		//calc(Deepwood_Memories(Sacrificial_Fragments(Nahida::get())));
 		//calc(Deepwood_Memories(Fruit_of_Fulfillment(Nahida::get())));
+#undef Nahida
+
+		calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida<true>::get(), 0)));
 
 //#define yoimiya Enduring_Rock(Zhong_Li(Yun_Jin_3(Yoimiya::get())))
 //		calc(Shimenawa_s_Reminiscence(Thundering_Pulse(yoimiya)), true);
@@ -137,8 +139,11 @@ int main(int argc, char** argv)
 		//calc(Gilded_Dreams(Bloom::get(), 0));
 		//calc(Elemental_2(Elemental_2(Bloom::get())), false, set22);
 
-		calc(Shattering_Ice(Amenoma_Kageuchi(Blizzard_Strayer(Ayaka::get(), true))));
-		calc(Shattering_Ice(Mistsplitter_Reforged(Blizzard_Strayer(Ayaka::get(), true))));
+		//calc(Shattering_Ice(Amenoma_Kageuchi(Blizzard_Strayer(Ayaka::get(), true))));
+		//calc(Shattering_Ice(Mistsplitter_Reforged(Blizzard_Strayer(Ayaka::get(), true))));
+
+		// 丘丘王
+		//calc(Shattering_Ice(Amos_Bow(Blizzard_Strayer(Gan_Yu::get(), false), 5)));
 	}
 	catch (const string& e)
 	{

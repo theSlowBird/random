@@ -31,3 +31,13 @@ auto Rust(Tao chara, int rank)
 	chara.value[bonus] += 0.3 + rank * 0.1;
 	return chara;
 }
+
+// °¢ÄªË¹Ö®¹­
+template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
+auto Amos_Bow(Tao chara, int time)
+{
+	chara.baseATK += 608;
+	chara.value[ATK] += 0.496;
+	chara.value[bonus] += 0.12 + time * 0.08;
+	return chara;
+}
