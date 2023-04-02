@@ -77,6 +77,7 @@ struct options
 	// k == 3: equal else
 	int k = 3;
 	double refer_value = 0;
+	string content;
 	static options set_refer_value(double refer_value)
 	{
 		options op;
@@ -87,6 +88,12 @@ struct options
 	{
 		options op;
 		op.refer = refer;
+		return op;
+	}
+	static options set_content(const string& content)
+	{
+		options op;
+		op.content = content;
 		return op;
 	}
 };
@@ -381,6 +388,11 @@ void calc(const Tao& tao, options op = {})
 	string filename = regex_replace(ss.str(), regex("[<>:\"/\\\\|?*]"), "_");
 	show(filename);
 	ofstream fout(filesystem::path("data") / filename);
+	if (!fout)
+	{
+		cerr << "can not open file \"" + filename << '\"' << endl;
+		exit(1);
+	}
 	cout << typeid(Tao).name() << endl;
 	fout << "month,mean,stdev\n";
 	// no reference, then force to reference
@@ -418,5 +430,6 @@ void calc(const Tao& tao, options op = {})
 		fout << month + 1 << ',' << mean << ',' << stdev << endl;
 	}
 	timer();
+	fout << ref.evaluate() << ',' << op.content;
 	cout << string(20, '=') << "end " name2str(calc) << string(40, '=') << endl;
 }

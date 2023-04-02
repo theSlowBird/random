@@ -44,3 +44,6 @@ typename = enable_if_t<is_base_of<character, T>::value>
 
 ### 修复`Fixed`
 * 文件名中的尖括号自动合法化，并将输出全部放入data文件夹
+
+### 新增`Features`
+* plot>100
