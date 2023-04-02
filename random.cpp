@@ -64,7 +64,11 @@ int main(int argc, char** argv)
 		timer(true);
 		//calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get())));
 
+<<<<<<< HEAD
 		CALC(Crimson_Witch_of_Flames(Staff_of_Homa(Hu_Tao::get()), 1));
+=======
+		calc(Crimson_Witch_of_Flames(Staff_of_Homa(Hu_Tao::get()), 1));
+>>>>>>> 4a895b26b359961e7e52c0551837f1f47c001a29
 		
 		//calc(Crimson_Witch_of_Flames(Primordial_Jade_Winged_Spear(Hu_Tao::get())));
 		//calc(Crimson_Witch_of_Flames(Dragon_s_Bane(Hu_Tao::get())));
@@ -79,7 +83,11 @@ int main(int argc, char** argv)
 		//calc(Elemental_2(ATK_2(Kagura_s_Verity(Yae_Miko::get_with_Kazuha()))));
 
 #define Nahida Nahida<false>
+<<<<<<< HEAD
 		CALC(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get(), 0)));
+=======
+		calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get(), 0)));
+>>>>>>> 4a895b26b359961e7e52c0551837f1f47c001a29
 		//calc(Elemental_2(Elemental_2(A_Thousand_Floating_Dreams(Nahida::get(), 0))), false, set22);
 		//calc(Deepwood_Memories(Magic_Guide(Nahida::get())));
 		//calc(Bonus_2(Elemental_2(A_Thousand_Floating_Dreams(Nahida::get(), 0))));
@@ -90,7 +98,11 @@ int main(int argc, char** argv)
 		//calc(Deepwood_Memories(Fruit_of_Fulfillment(Nahida::get())));
 #undef Nahida
 
+<<<<<<< HEAD
 		CALC(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida<true>::get(), 0)));
+=======
+		calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida<true>::get(), 0)));
+>>>>>>> 4a895b26b359961e7e52c0551837f1f47c001a29
 
 //#define yoimiya Enduring_Rock(Zhong_Li(Yun_Jin_3(Yoimiya::get())))
 //		calc(Shimenawa_s_Reminiscence(Thundering_Pulse(yoimiya)), true);

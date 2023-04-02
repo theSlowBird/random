@@ -388,11 +388,14 @@ void calc(const Tao& tao, options op = {})
 	string filename = regex_replace(ss.str(), regex("[<>:\"/\\\\|?*]"), "_");
 	show(filename);
 	ofstream fout(filesystem::path("data") / filename);
+<<<<<<< HEAD
 	if (!fout)
 	{
 		cerr << "can not open file \"" + filename << '\"' << endl;
 		exit(1);
 	}
+=======
+>>>>>>> 4a895b26b359961e7e52c0551837f1f47c001a29
 	cout << typeid(Tao).name() << endl;
 	fout << "month,mean,stdev\n";
 	// no reference, then force to reference
