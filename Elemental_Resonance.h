@@ -12,6 +12,7 @@
 #include "Yoimiya.h"
 #include "Bloom.h"
 #include "Ayaka.h"
+#include "Gan_Yu.h"
 
 #include "buff.h"
 

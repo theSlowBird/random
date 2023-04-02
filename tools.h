@@ -2,6 +2,7 @@
 #include "random.h"
 #include "ddB.h"
 #define name2str(x) #x
+#define show(x) cerr << #x": " << x << endl;
 extern int MONTH, PERSONS;
 
 void timer(bool init = false)
@@ -348,7 +349,7 @@ void calc(const Tao& tao, options op = {})
 	for (size_t i = 0; i < no_bonus; i++)
 	{
 		mean.value[i] = get_mean(sub[i]) + tao.value[i];
-		if (mean.value[i] - ref.value[i] < 1e-10)
+		if (abs(mean.value[i] - ref.value[i]) < 1e-10)
 			mean.value[i] = ref.value[i];
 	}
 
@@ -377,7 +378,9 @@ void calc(const Tao& tao, options op = {})
 	cout << endl;
 	stringstream ss;
 	ss << typeid(Tao).name() << ",MONTH=" << MONTH << ",PERSONS=" << PERSONS << ".csv";
-	ofstream fout(ss.str());
+	string filename = regex_replace(ss.str(), regex("[<>:\"/\\\\|?*]"), "_");
+	show(filename);
+	ofstream fout(filesystem::path("data") / filename);
 	cout << typeid(Tao).name() << endl;
 	fout << "month,mean,stdev\n";
 	// no reference, then force to reference

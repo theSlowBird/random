@@ -39,3 +39,8 @@ typename = enable_if_t<is_base_of<character, T>::value>
 ### 修复`Fixed`
 
 * 修复了纳西妲突破精通异常（155->115.2）
+
+## [1.2.1] - 2023.4.2
+
+### 修复`Fixed`
+* 文件名中的尖括号自动合法化，并将输出全部放入data文件夹

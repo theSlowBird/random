@@ -77,5 +77,8 @@
     <ClInclude Include="Sword.h">
       <Filter>头文件\outfits</Filter>
     </ClInclude>
+    <ClInclude Include="Gan_Yu.h">
+      <Filter>头文件\character</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
