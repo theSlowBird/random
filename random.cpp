@@ -64,11 +64,7 @@ int main(int argc, char** argv)
 		timer(true);
 		//calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get())));
 
-<<<<<<< HEAD
 		CALC(Crimson_Witch_of_Flames(Staff_of_Homa(Hu_Tao::get()), 1));
-=======
-		calc(Crimson_Witch_of_Flames(Staff_of_Homa(Hu_Tao::get()), 1));
->>>>>>> 4a895b26b359961e7e52c0551837f1f47c001a29
 		
 		//calc(Crimson_Witch_of_Flames(Primordial_Jade_Winged_Spear(Hu_Tao::get())));
 		//calc(Crimson_Witch_of_Flames(Dragon_s_Bane(Hu_Tao::get())));
@@ -83,11 +79,7 @@ int main(int argc, char** argv)
 		//calc(Elemental_2(ATK_2(Kagura_s_Verity(Yae_Miko::get_with_Kazuha()))));
 
 #define Nahida Nahida<false>
-<<<<<<< HEAD
 		CALC(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get(), 0)));
-=======
-		calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get(), 0)));
->>>>>>> 4a895b26b359961e7e52c0551837f1f47c001a29
 		//calc(Elemental_2(Elemental_2(A_Thousand_Floating_Dreams(Nahida::get(), 0))), false, set22);
 		//calc(Deepwood_Memories(Magic_Guide(Nahida::get())));
 		//calc(Bonus_2(Elemental_2(A_Thousand_Floating_Dreams(Nahida::get(), 0))));
@@ -98,11 +90,7 @@ int main(int argc, char** argv)
 		//calc(Deepwood_Memories(Fruit_of_Fulfillment(Nahida::get())));
 #undef Nahida
 
-<<<<<<< HEAD
 		CALC(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida<true>::get(), 0)));
-=======
-		calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida<true>::get(), 0)));
->>>>>>> 4a895b26b359961e7e52c0551837f1f47c001a29
 
 //#define yoimiya Enduring_Rock(Zhong_Li(Yun_Jin_3(Yoimiya::get())))
 //		calc(Shimenawa_s_Reminiscence(Thundering_Pulse(yoimiya)), true);
@@ -123,17 +111,19 @@ int main(int argc, char** argv)
 		//s20220929[3].sub_value = { 1.6,1.7 };
 		//s20220929[4].sub_stat = { CR,atk };
 		//s20220929[4].sub_value = { 4.4,1 }; return s20220929; }(), Shimenawa_s_Reminiscence(Slingshot(yoimiya)));
-		auto rel = calc_my([] {auto s20230105 = get_std_sets({ ATK,bonus,CR });
-		s20230105[0].sub_stat = { EM,CR,CRD,ATK };
-		s20230105[0].sub_value = { 2.6,0.9,2.7,0.9 };
-		s20230105[1].sub_stat = { CR,CRD,ATK };
-		s20230105[1].sub_value = { 1.6,2.5,1.4 };
-		s20230105[2].sub_stat = { CR,CRD,atk };
-		s20230105[2].sub_value = { 1.5,1.8,2.4 };
-		s20230105[3].sub_stat = { atk,CR,CRD,EM };
-		s20230105[3].sub_value = { 0.8,1.5,2.7,2 };
-		s20230105[4].sub_stat = { CRD,ATK,atk };
-		s20230105[4].sub_value = { 4.2,1,1.5 }; return s20230105; }(), Shimenawa_s_Reminiscence(Rust(yoimiya, 4)));
+
+		//auto rel = calc_my([] {auto s20230105 = get_std_sets({ ATK,bonus,CR });
+		//s20230105[0].sub_stat = { EM,CR,CRD,ATK };
+		//s20230105[0].sub_value = { 2.6,0.9,2.7,0.9 };
+		//s20230105[1].sub_stat = { CR,CRD,ATK };
+		//s20230105[1].sub_value = { 1.6,2.5,1.4 };
+		//s20230105[2].sub_stat = { CR,CRD,atk };
+		//s20230105[2].sub_value = { 1.5,1.8,2.4 };
+		//s20230105[3].sub_stat = { atk,CR,CRD,EM };
+		//s20230105[3].sub_value = { 0.8,1.5,2.7,2 };
+		//s20230105[4].sub_stat = { CRD,ATK,atk };
+		//s20230105[4].sub_value = { 4.2,1,1.5 }; return s20230105; }(), Shimenawa_s_Reminiscence(Rust(yoimiya, 4)));
+
 		//calc(Shimenawa_s_Reminiscence(Rust(yoimiya, 4)), options::set_refer_value(rel));
 		//calc(Gilded_Dreams(Rust(yoimiya, 4), 1), options::set_refer_value(rel));
 		//calc(Crimson_Witch_of_Flames(Rust(yoimiya, 4), 1), options::set_refer_value(rel));
