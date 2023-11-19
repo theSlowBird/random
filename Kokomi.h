@@ -5,7 +5,11 @@ class Kokomi :public character
 {
 public:
 	Kokomi(const character& chara) :character(chara) {}
-	double evaluate()const
+	/// <summary>
+	/// 治疗量
+	/// </summary>
+	/// <returns></returns>
+	double evaluate()const override
 	{
 		return (0.0792 * HP() + 932.22) * (1 + value[healing]);
 	}

@@ -9,7 +9,7 @@ public:
 	{
 		Gan_Yu ganyu({ 9797,335,630,{::ATK,bonus,CRD},{no_bonus,::HP,::DEF,ER,healing,EM} });
 		ganyu.value[CRD] += 0.384;
-		// Ëª»ªÊ¸¡¤Ëª»ªÕÀ·¢
+		// éœœåçŸ¢Â·éœœåç»½å‘
 		ganyu.rate = 3.92;
 		ganyu.reaction_type = none;
 		return ganyu;

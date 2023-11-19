@@ -6,7 +6,7 @@ class Hu_Tao :public character
 public:
 	Hu_Tao(const character& chara) :character(chara) {}
 	double HPrate = 0.0626;
-	double ATK()const
+	double ATK()const override
 	{
 		return HP() * HPrate + character::ATK();
 	}

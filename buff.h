@@ -1,15 +1,13 @@
 #pragma once
 #include "random.h"
 
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Zhong_Li(Tao chara)
+auto Zhong_Li(derived_from_character auto chara)
 {
 	chara.resistance -= 0.2;
 	return chara;
 }
 
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Yun_Jin_3(Tao chara)
+auto Yun_Jin_3(derived_from_character auto chara)
 {
 	chara.value[bonus] += 0.15;
 	// color == 3
@@ -17,10 +15,16 @@ auto Yun_Jin_3(Tao chara)
 	return chara;
 }
 
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Bannett(Tao chara)
+auto Bannett(derived_from_character auto chara)
 {
 	chara.value[atk] += 749 * 1.32;
 	chara.value[ATK] += 0.2;
+	return chara;
+}
+
+auto Kaedehara_Kazuha(derived_from_character auto chara)
+{
+	chara.resistance -= 0.4;
+	chara.value[bonus] += 0.4;
 	return chara;
 }

@@ -1,9 +1,8 @@
 #pragma once
 #include "random.h"
 
-// ³ãÁÒµÄÑ×Ö®Ä§Å®
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Crimson_Witch_of_Flames(Tao chara, int e)
+// ç‚½çƒˆçš„ç‚ä¹‹é­”å¥³
+auto Crimson_Witch_of_Flames(derived_from_character auto chara, int e)
 {
 	chara.value[bonus] += 0.15 * (1 + e * 0.5);
 	chara.reaction_multi_bonus += 0.15;
@@ -11,89 +10,87 @@ auto Crimson_Witch_of_Flames(Tao chara, int e)
 	return chara;
 }
 
-// »ñµÃ15%Ä³ÔªËØÉËº¦¼Ó³É¡£
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Bonus_2(Tao chara)
+// è·å¾—15%æŸå…ƒç´ ä¼¤å®³åŠ æˆã€‚
+auto Bonus_2(derived_from_character auto chara)
 {
 	chara.value[bonus] += 0.15;
 	return chara;
 }
 
-// ÊÎ½ğÖ®ÃÎ
+// é¥°é‡‘ä¹‹æ¢¦
 // 80 + 50 * 3
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Gilded_Dreams(Tao chara, int same)
+auto Gilded_Dreams(derived_from_character auto chara, int same)
 {
 	chara.value[EM] += 80 + 50 * (3 - same);
 	chara.value[ATK] += 0.14 * same;
 	return chara;
 }
 
-// ÉîÁÖµÄ¼ÇÒä
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Deepwood_Memories(Tao chara)
+// æ·±æ—çš„è®°å¿†
+auto Deepwood_Memories(derived_from_character auto chara)
 {
 	chara.value[bonus] += 0.15;
 	chara.resistance -= 0.3;
 	return chara;
 }
 
-// ÔªËØ¾«Í¨Ìá¸ß80µã¡£
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Elemental_2(Tao chara)
+// å…ƒç´ ç²¾é€šæé«˜80ç‚¹ã€‚
+auto Elemental_2(derived_from_character auto chara)
 {
 	chara.value[EM] += 80;
 	return chara;
 }
 
-// ¹¥»÷Á¦Ìá¸ß18%¡£
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto ATK_2(Tao chara)
+// æ”»å‡»åŠ›æé«˜18%ã€‚
+auto ATK_2(derived_from_character auto chara)
 {
 	chara.value[ATK] += 0.18;
 	return chara;
 }
 
-// ÖÎÁÆ¼Ó³ÉÌá¸ß15%¡£
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto healing_2(Tao chara)
+// æ²»ç–—åŠ æˆæé«˜15%ã€‚
+auto healing_2(derived_from_character auto chara)
 {
 	chara.value[healing] += 0.15;
 	return chara;
 }
 
-// ×·ÒäÖ®×¢Á¬
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Shimenawa_s_Reminiscence(Tao chara)
+// è¿½å¿†ä¹‹æ³¨è¿
+auto Shimenawa_s_Reminiscence(derived_from_character auto chara)
 {
 	chara.value[ATK] += 0.18;
 	chara.value[bonus] += 0.5;
 	return chara;
 }
 
-// À´ì§ÓàÏì
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Echoes_of_an_Offering(Tao chara)
+// æ¥æ­†ä½™å“
+auto Echoes_of_an_Offering(derived_from_character auto chara)
 {
 	chara.value[ATK] += 0.18;
 	chara.rate_add += 0.3;
 	return chara;
 }
 
-// ÀÖÔ°ÒÅÂäÖ®»¨
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Flower_of_Paradise_Lost(Tao chara)
+// ä¹å›­é—è½ä¹‹èŠ±
+auto Flower_of_Paradise_Lost(derived_from_character auto chara)
 {
 	chara.value[EM] += 80;
 	chara.reaction_extra_bonus += 0.8;
 	return chara;
 }
 
-// ±ù·çÃÔÍ¾µÄÓÂÊ¿
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto Blizzard_Strayer(Tao chara, bool freezable)
+// å†°é£è¿·é€”çš„å‹‡å£«
+auto Blizzard_Strayer(derived_from_character auto chara, bool freezable)
 {
 	chara.value[bonus] += 0.15;
 	chara.value[CR] += 0.2 * (1 + freezable);
+	return chara;
+}
+
+// é€å½±çŒäºº
+auto Marechaussee_Hunter(derived_from_character auto chara, int hp_change = 3)
+{
+	chara.value[bonus] += 0.15;
+	chara.value[CR] += 0.12 * hp_change;
 	return chara;
 }

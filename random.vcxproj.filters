@@ -80,5 +80,8 @@
     <ClInclude Include="Gan_Yu.h">
       <Filter>头文件\character</Filter>
     </ClInclude>
+    <ClInclude Include="Nuevillette.h">
+      <Filter>头文件\character</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

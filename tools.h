@@ -18,8 +18,7 @@ void timer(bool init = false)
 	begin_time = end_time;
 }
 
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
-auto add_set(Tao tao, const vector<artifact>& artis)
+auto add_set(derived_from_character auto tao, const vector<artifact>& artis)
 {
 	for (auto& i : artis)
 	{
@@ -154,10 +153,10 @@ namespace calc_data {
 	return set22invmap; }();
 }
 
-template<typename Tao, typename = enable_if_t<is_base_of<character, Tao>::value>>
+template<derived_from_character Tao>
 void calc(const Tao& tao, options op = {})
 {
-	cout << string(20, '=') << "begin " name2str(calc) << string(40, '=') << endl;
+	cout << string(20, '=') << "begin " name2str(calc) << op.content << string(40, '=') << endl;
 	static vector<double>reference;
 	// get std_sets
 	auto std_sets = get_std_sets(tao.basic);
@@ -228,6 +227,7 @@ void calc(const Tao& tao, options op = {})
 			{
 				for (size_t i = 0; i < 135; i++)
 				{
+					// 额外算散件
 					while (rat(gen) != 0)
 					{
 						artifact e{ false };

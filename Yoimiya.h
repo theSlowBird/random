@@ -8,12 +8,13 @@ public:
 	double reaction_rate_ = (0.6359 + 1.5859 + 1.8887) * 1.6174;
 	double base_damage_add = 0;
 	double rate_add = 0;
+	//  no override
 	double reaction_base_damage()const
 	{
 		return ATK() * (rate - reaction_rate_) + (base_damage_add + rate_add * ATK()) * 4
 			+ (ATK() * reaction_rate_ + (base_damage_add + rate_add * ATK()) * 3) * reaction_base * (1 + reaction_multi());
 	}
-	double evaluate()const
+	double evaluate()const override
 	{
 		return reaction_base_damage() * Bonus() * crit() * Resistance() * defend;
 	}
@@ -25,7 +26,7 @@ public:
 		yoimiya.rate = (0.6359 * 2 + 1.2199 + 1.5859 + 0.8282 * 2 + 1.8887) * 1.6174;
 		yoimiya.reaction_type = multi;
 		yoimiya.reaction_base = 1.5;
-		// ÔÆİÀ£¬Ë«ÑÒ£¬ÖÓÀë
+		// äº‘å ‡ï¼ŒåŒå²©ï¼Œé’Ÿç¦»
 		return yoimiya;
 	}
 };

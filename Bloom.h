@@ -5,7 +5,7 @@ class Bloom : public character
 {
 public:
 	Bloom(const character& chara) :character(chara) {}
-	double evaluate()const
+	double evaluate()const override
 	{
 		return 1446.85 * reaction_base * (1 + reaction_extra());
 	}

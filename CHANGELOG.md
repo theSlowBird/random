@@ -47,3 +47,11 @@ typename = enable_if_t<is_base_of<character, T>::value>
 
 ### 新增`Features`
 * plot>100
+
+## [1.3.0] - 2023.11.19
+
+### 优化`Refactored`
+```cpp
+template<typename T>
+concept derived_from_character = derived_from<T, character>;
+```

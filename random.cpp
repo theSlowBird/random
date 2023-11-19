@@ -1,11 +1,10 @@
-﻿#include <bits/stdc++.h>
+#include <bits/stdc++.h>
 int MONTH = 12, PERSONS = 100;
 #include "Elemental_Resonance.h"
 using namespace std;
 #define CALC(x) calc(x, options::set_content(#x));
 
-template<typename Tao>
-auto calc_my(const vector<artifact>& s20221102, Tao tao)
+auto calc_my(const vector<artifact>& s20221102, derived_from_character auto tao)
 {
 	cout << string(20, '=') << "begin " name2str(calc_my) << string(40, '=') << endl;
 	auto equip = add_set(tao, s20221102);
@@ -64,8 +63,10 @@ int main(int argc, char** argv)
 		timer(true);
 		//calc(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get())));
 
+#ifndef _DEBUG
 		CALC(Crimson_Witch_of_Flames(Staff_of_Homa(Hu_Tao::get()), 1));
-		
+#endif // !_DEBUG
+
 		//calc(Crimson_Witch_of_Flames(Primordial_Jade_Winged_Spear(Hu_Tao::get())));
 		//calc(Crimson_Witch_of_Flames(Dragon_s_Bane(Hu_Tao::get())));
 		//calc(Elemental_2(Bonus_2(Staff_of_Homa(Hu_Tao::get()))));
@@ -79,7 +80,12 @@ int main(int argc, char** argv)
 		//calc(Elemental_2(ATK_2(Kagura_s_Verity(Yae_Miko::get_with_Kazuha()))));
 
 #define Nahida Nahida<false>
+
+#ifndef _DEBUG
 		CALC(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida::get(), 0)));
+#endif // !_DEBUG
+
+
 		//calc(Elemental_2(Elemental_2(A_Thousand_Floating_Dreams(Nahida::get(), 0))), false, set22);
 		//calc(Deepwood_Memories(Magic_Guide(Nahida::get())));
 		//calc(Bonus_2(Elemental_2(A_Thousand_Floating_Dreams(Nahida::get(), 0))));
@@ -90,7 +96,7 @@ int main(int argc, char** argv)
 		//calc(Deepwood_Memories(Fruit_of_Fulfillment(Nahida::get())));
 #undef Nahida
 
-		CALC(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida<true>::get(), 0)));
+		//CALC(Deepwood_Memories(A_Thousand_Floating_Dreams(Nahida<true>::get(), 0)));
 
 //#define yoimiya Enduring_Rock(Zhong_Li(Yun_Jin_3(Yoimiya::get())))
 //		calc(Shimenawa_s_Reminiscence(Thundering_Pulse(yoimiya)), true);
@@ -147,6 +153,16 @@ int main(int argc, char** argv)
 
 		// 丘丘王
 		//calc(Shattering_Ice(Amos_Bow(Blizzard_Strayer(Gan_Yu::get(), false), 5)));
+
+		//CALC(Sacrificial_Jade(Marechaussee_Hunter(Nuevillette::get(3))));
+		//CALC(Kaedehara_Kazuha(Zhong_Li(Sacrificial_Jade(Marechaussee_Hunter(Nuevillette::get(3))))));
+		//CALC(Lost_Prayer_to_the_Sacred_Winds(Marechaussee_Hunter(Nuevillette::get(3)), 4));
+		//CALC(Tome_of_the_Eternal_Flow(Marechaussee_Hunter(Nuevillette::get(2))));
+
+		auto rel = calc_my([] {auto std = get_std_sets({ DEF,bonus,DEF });
+		std[0].sub_stat = { hp,CR,CRD };
+		std[0].sub_value = { (14065 - main_value[hp]) / (main_value[hp] / sub_value_ratio[hp]),.21 / (main_value[CR] / sub_value_ratio[CR]),1.041 / (main_value[CRD] / sub_value_ratio[CRD]) };
+		return std; }(), Tome_of_the_Eternal_Flow_80(Marechaussee_Hunter(Nuevillette::get()))); // 17385
 	}
 	catch (const string& e)
 	{

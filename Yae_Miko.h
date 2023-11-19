@@ -6,16 +6,18 @@ class Yae_Miko :public character
 public:
 	double e_bonus = 0;
 	Yae_Miko(const character& chara) :character(chara) {}
+	// no override
 	double e_base()const
 	{
 		return (15 * ATK() * 1.706 + 5 * reaction_base * 1446 * (1 + reaction_rate())) * (0.0015 * em() + e_bonus + Bonus());
 	}
+	// no override
 	double q_base()const
 	{
 		return (4.68 + 6.01 * 3) * ATK() + 4 * reaction_base * 1446 * (1 + reaction_rate()) * Bonus();
 	}
 	// 3e(15)+q
-	double evaluate()const
+	double evaluate()const override
 	{
 		return (3 * e_base() + q_base()) * crit() * Resistance() * defend;
 	}

@@ -46,6 +46,9 @@ public:
 	part position;
 	attribute main_stat;
 	vector<attribute>sub_stat;
+	/// <summary>
+	/// 副词条，单次最大值记为1
+	/// </summary>
 	vector<double>sub_value;
 	artifact(bool full = true)
 	{
@@ -183,15 +186,16 @@ private:
 
 class character
 {
-public:
+protected:
 	double baseHP, baseATK, baseDEF;
+	double rate = 0;
+	double reaction_base = 0;
+	reaction reaction_type = none;
+public:
 	vector<double>value;
 	double reaction_multi_bonus = 0;
 	double reaction_extra_bonus = 0;
 	double reaction_rate_bonus = 0;
-	double rate = 0;
-	reaction reaction_type = none;
-	double reaction_base = 0;
 	double defend = 0.5;
 	double resistance = 0.1;
 	vector<attribute>basic, ban;
@@ -203,16 +207,22 @@ public:
 		value[CRD] = 0.5;
 		value[ER] = 1;
 	}
-	void add(const vector<attribute>& stat, const vector<double>& value)
-	{
-		for (size_t i = 0; i < stat.size(); i++)
-		{
-			if (stat[i] <= healing)
-			{
-				this->value[stat[i]] += value[i];
-			}
-		}
-	}
+//protected:
+//	void add(const vector<attribute>& stat, const vector<double>& value)
+//	{
+//		for (size_t i = 0; i < stat.size(); i++)
+//		{
+//			if (stat[i] <= healing)
+//			{
+//				this->value[stat[i]] += value[i];
+//			}
+//		}
+//	}
+public:
+	/// <summary>
+	/// 增加单个圣遗物
+	/// </summary>
+	/// <param name="arti">单个圣遗物</param>
 	void add(const artifact& arti)
 	{
 		if (arti.main_stat <= healing)
@@ -239,6 +249,7 @@ public:
 	{
 		this->baseATK += baseATK;
 	}
+protected:
 	double HP()const
 	{
 		return baseHP * (1 + value[::HP]) + value[hp];
@@ -271,6 +282,17 @@ public:
 	{
 		return max(0., min(1., cr())) * crd() + 1;
 	}
+	virtual double base_damage()const
+	{
+		return ATK() * rate;
+	}
+	double Resistance()const
+	{
+		if (resistance > 0)
+			return 1 - resistance;
+		return 1 - resistance / 2;
+	}
+public:
 	double reaction_multi()const
 	{
 		return reaction_multi_bonus + 2.78 * em() / (1400 + em());
@@ -283,15 +305,18 @@ public:
 	{
 		return reaction_rate_bonus + 5 * em() / (1200 + em());
 	}
-	virtual double base_damage()const
+	double crit_damage()const
 	{
-		return ATK() * rate;
+		return evaluate() / crit() * (1 + crd());
 	}
-	double Resistance()const
+	void print()const
 	{
-		if (resistance > 0)
-			return 1 - resistance;
-		return 1 - resistance / 2;
+		auto label = label_print();
+		auto value = later_print();
+		for (size_t i = 0; i < label.size(); i++)
+		{
+			cout << label[i] << ": " << value[i] << endl;
+		}
 	}
 	virtual double evaluate()const
 	{
@@ -303,10 +328,6 @@ public:
 		}
 		throw "no reaction_type";
 	}
-	double crit_damage()const
-	{
-		return evaluate() / crit() * (1 + crd());
-	}
 	vector<double> later_print()const
 	{
 		return { ATK(),base_damage(),HP(),value[EM],Bonus(),cr(),crd() };
@@ -315,13 +336,7 @@ public:
 	{
 		return { "atk","base_damage","hp","EM","bonus","cr","crd" };// , "raction_rate", "not_rate"
 	}
-	void print()const
-	{
-		auto label = label_print();
-		auto value = later_print();
-		for (size_t i = 0; i < label.size(); i++)
-		{
-			cout << label[i] << ": " << value[i] << endl;
-		}
-	}
 };
+
+template<typename T>
+concept derived_from_character = derived_from<T, character>;

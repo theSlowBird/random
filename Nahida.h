@@ -6,19 +6,19 @@ class Nahida :public character
 {
 public:
 	Nahida(const character& chara) :character(chara) {}
-	double em()const
+	double em()const override
 	{
 		return value[EM] * (4 + q) / 4;
 	}
-	double Bonus()const
+	double Bonus()const override
 	{
 		return 1 + value[bonus] + min(0.8, max(0., em() - 200) * 0.001);
 	}
-	double cr()const
+	double cr()const override
 	{
 		return value[CR] + min(0.24, max(0., em() - 200) * 0.0003);
 	}
-	double base_damage()const
+	double base_damage()const override
 	{
 		return character::base_damage() + 3.715 * em();
 	}
